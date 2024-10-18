@@ -1,2 +1,2 @@
-# wolfram-alpha
-Managing the Wolfram Alpha API in APIs.io.
+# Wolfram|Alpha
+This is a repository for managing the Wolfram|Alpha listing in APIs.io.
