@@ -23,6 +23,8 @@ tags:
 properties:
 - type: Documentation
   url: https://products.wolframalpha.com/llm-api/documentation
+- type: OpenAPI
+  url: openapi.yml
 common:
 - type: Signup
   url: https://developer.wolframalpha.com/
