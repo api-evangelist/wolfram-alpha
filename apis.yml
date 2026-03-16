@@ -1,5 +1,5 @@
 aid: wolfram-alpha
-url: http://example.com/apis.json
+url: https://raw.githubusercontent.com/api-evangelist/wolfram-alpha/refs/heads/main/apis.yml
 apis:
   - aid: wolfram-alpha:llm-api
     name: Wolfram|Alpha LLM API
@@ -11,8 +11,8 @@ apis:
     properties:
       - url: https://products.wolframalpha.com/llm-api/documentation
         type: Documentation
-      - url: openapi/.yml
-        type: OpenAPI
+      - url: https://developer.wolframalpha.com/
+        type: Portal
     description: >-
       Get results optimized for use by a large language model with the LLM API.
       Built on the same technology as the , the LLM API is built for use
@@ -28,7 +28,7 @@ common:
   - url: https://developer.wolframalpha.com/
     type: Signup
 created: '2024-10-18'
-modified: '2025-01-04'
+modified: '2026-03-16'
 description: >-
   Wolfram|Alpha is a computational search engine that uses a vast array of
   algorithms and curated data sets to provide users with precise answers and
@@ -41,8 +41,7 @@ description: >-
   valuable insights and knowledge in a matter of seconds.
 maintainers:
   - FN: Kin Lane
-    email: info@apievangelist.com
-    X-twitter: apievangelist
+    email: kin@apievangelist.com
 specificationVersion: '0.18'
 position: Consuming
 access: 3rd-Party
