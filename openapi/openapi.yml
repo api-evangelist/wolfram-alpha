@@ -1,5 +1,5 @@
 info:
-  title: WolframAlpha LLM API
+  title: Wolfram|Alpha WolframAlpha LLM API
   description: API for querying WolframAlpha for natural language queries and computational knowledge results.
   version: 1.0.0
 servers:
@@ -7,7 +7,7 @@ servers:
 paths:
   /llm-api:
     get:
-      summary: Submit a query to WolframAlpha LLM API
+      summary: Wolfram|Alpha Submit a query to WolframAlpha LLM API
       description: Submit a natural language query with an AppID and input to WolframAlpha.
       parameters:
         - name: appid

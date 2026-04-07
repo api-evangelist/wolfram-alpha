@@ -1,11 +1,13 @@
 aid: wolfram-alpha
-url: https://raw.githubusercontent.com/api-evangelist/wolfram-alpha/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/wolfram-alpha/refs/heads/main/apis.yml
 apis:
   - aid: wolfram-alpha:llm-api
     name: Wolfram|Alpha LLM API
     tags:
       - LLM
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: 
+      https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
     baseURL: https://www.wolframalpha.com/api/v1/
     humanURL: https://products.wolframalpha.com/llm-api/documentation
     properties:
@@ -30,15 +32,12 @@ common:
 created: '2024-10-18'
 modified: '2026-03-16'
 description: >-
-  Wolfram|Alpha is a computational search engine that uses a vast array of
-  algorithms and curated data sets to provide users with precise answers and
-  in-depth information on a wide range of topics. It can solve complex
-  mathematical equations, provide scientific data and calculations, offer
-  historical information, and even assist with language translation.
-  Wolfram|Alpha is designed to understand natural language input and deliver
-  relevant results quickly and accurately. Whether you need help with homework,
-  research, or simply want to explore new topics, Wolfram|Alpha can provide
-  valuable insights and knowledge in a matter of seconds.
+  Wolfram|Alpha is a computational search engine that uses a vast array of algorithms
+  and curated data sets to provide users with precise answers and in-depth information
+  on a wide range of topics. It can solve complex mathematical equations, provide
+  scientific data and calculations, offer historical information, and even assist
+  with language translation. Wolfram|Alpha is designed to understand natural language
+  input and deliver relevant results quickly and accurately.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
