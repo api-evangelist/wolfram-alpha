@@ -110,6 +110,8 @@ paths:
         '501':
           description: Input cannot be interpreted by the API.
 
+      tags:
+        - Llm Api
 components:
   securitySchemes:
     BearerAuth:
@@ -118,3 +120,5 @@ components:
       bearerFormat: AppID
 security:
   - BearerAuth: []
+tags:
+  - name: Llm Api
