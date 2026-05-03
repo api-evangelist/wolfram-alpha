@@ -1,0 +1,227 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Wolfram|Alpha"
+  description: >-
+    Unified vocabulary taxonomy for the Wolfram|Alpha API suite, mapping
+    computational knowledge operations, answer formats, and AI integration
+    workflows across operational (OpenAPI) and capability (Naftiko) dimensions.
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+operational:
+  apis:
+    - namespace: wolfram-llm
+      name: Wolfram|Alpha LLM API
+      version: "1.0"
+      baseUrl: https://www.wolframalpha.com/api/v1
+      status: active
+    - namespace: wolfram-full
+      name: Wolfram|Alpha Full Results API
+      version: "2.0"
+      baseUrl: https://api.wolframalpha.com/v2
+      status: active
+    - namespace: wolfram-short
+      name: Wolfram|Alpha Short Answers API
+      version: "1.0"
+      baseUrl: https://api.wolframalpha.com/v1
+      status: active
+    - namespace: wolfram-spoken
+      name: Wolfram|Alpha Spoken Results API
+      version: "1.0"
+      baseUrl: https://api.wolframalpha.com/v1
+      status: active
+    - namespace: wolfram-simple
+      name: Wolfram|Alpha Simple API
+      version: "1.0"
+      baseUrl: https://api.wolframalpha.com/v1
+      status: active
+
+  resources:
+    - name: queries
+      apis: [wolfram-llm, wolfram-full, wolfram-short, wolfram-spoken, wolfram-simple]
+      actions: [query]
+      description: Natural language queries submitted to Wolfram|Alpha for computation.
+    - name: pods
+      apis: [wolfram-full]
+      actions: [list, filter]
+      description: Structured result sections containing computed data and visualizations.
+    - name: answers
+      apis: [wolfram-short, wolfram-spoken]
+      actions: [get]
+      description: Concise text answers returned for simple factual queries.
+    - name: images
+      apis: [wolfram-simple]
+      actions: [render]
+      description: Rendered image results for visual embedding.
+
+  actions:
+    - name: query
+      description: Submit a natural language query for computation
+      httpMethod: GET
+      pattern: read
+    - name: get
+      description: Retrieve a single result
+      httpMethod: GET
+      pattern: read
+    - name: render
+      description: Render a visual result as an image
+      httpMethod: GET
+      pattern: read
+
+  schemas:
+    core:
+      - name: LlmApiResponse
+        api: wolfram-llm
+        keyProperties: [query, inputInterpretation, result, images, link]
+      - name: FullResultsResponse
+        api: wolfram-full
+        keyProperties: [queryresult]
+      - name: Pod
+        api: wolfram-full
+        keyProperties: [title, scanner, id, position, primary, subpods]
+      - name: Subpod
+        api: wolfram-full
+        keyProperties: [plaintext, img]
+
+  parameters:
+    identifiers:
+      - name: appid
+        description: Application identifier for authentication
+        type: string
+    query_input:
+      - name: input
+        description: URL-encoded natural language query (LLM API, Full Results API)
+      - name: i
+        description: URL-encoded input query (Short Answers, Simple, Spoken APIs)
+    filters:
+      - name: units
+        description: Measurement system (metric or imperial)
+      - name: includepodid
+        description: Filter Full Results by pod ID
+      - name: excludepodid
+        description: Exclude specific pod IDs from Full Results
+      - name: format
+        description: Content format selection (image, plaintext, mathml, etc.)
+    location:
+      - name: latlong
+        description: Latitude/longitude for location-aware queries
+      - name: ip
+        description: IP address for location detection
+      - name: timezone
+        description: IANA timezone name
+    output:
+      - name: maxchars
+        description: Maximum response characters (LLM API)
+      - name: output
+        description: Response format (xml or json, Full Results API)
+      - name: timeout
+        description: Maximum processing time in seconds
+
+  enums:
+    units:
+      - metric
+      - imperial
+    output_format:
+      - xml
+      - json
+    content_formats:
+      - image
+      - plaintext
+      - mathml
+      - minput
+      - moutput
+      - cell
+      - sound
+      - wav
+
+  authentication:
+    schemes:
+      - name: AppID Query Parameter
+        type: apikey
+        placement: query
+        apis: [wolfram-full, wolfram-short, wolfram-simple, wolfram-spoken]
+      - name: Bearer Token
+        type: bearer
+        apis: [wolfram-llm]
+        description: AppID passed as Bearer token in Authorization header
+
+capability:
+  workflows:
+    - name: AI Knowledge Integration
+      file: capabilities/ai-knowledge-integration.yaml
+      description: Combines LLM API, Short Answers, and Spoken Results for AI applications
+      apisUsed: [wolfram-llm, wolfram-short, wolfram-spoken]
+      toolCount: 3
+      personas: [AI Developer, Chatbot Engineer]
+    - name: Computational Search
+      file: capabilities/computational-search.yaml
+      description: Full and LLM APIs for search platforms and educational tools
+      apisUsed: [wolfram-full, wolfram-llm]
+      toolCount: 2
+      personas: [Search Engineer, Platform Developer]
+
+  personas:
+    - id: ai-developer
+      name: AI Developer
+      description: Building AI applications and LLM integrations using Wolfram knowledge
+      workflows: [AI Knowledge Integration, Computational Search]
+    - id: chatbot-engineer
+      name: Chatbot Engineer
+      description: Building chatbots and voice assistants with factual answer capabilities
+      workflows: [AI Knowledge Integration]
+    - id: search-engineer
+      name: Search Engineer
+      description: Augmenting search platforms with computational intelligence
+      workflows: [Computational Search]
+    - id: platform-developer
+      name: Platform Developer
+      description: Integrating Wolfram computational capabilities into educational platforms
+      workflows: [Computational Search]
+
+  domains:
+    - name: Computational Knowledge
+      resources: [queries, answers, pods]
+      workflows: [AI Knowledge Integration, Computational Search]
+    - name: AI Integration
+      resources: [queries, answers]
+      workflows: [AI Knowledge Integration]
+    - name: Visual Results
+      resources: [images]
+      workflows: []
+
+  namespaces:
+    consumed:
+      - wolfram-llm
+      - wolfram-full
+      - wolfram-short
+      - wolfram-spoken
+    rest_exposed:
+      - name: wolfram-ai-api
+        port: 8080
+      - name: wolfram-search-api
+        port: 8081
+    mcp_exposed:
+      - name: wolfram-ai-mcp
+        port: 9090
+      - name: wolfram-search-mcp
+        port: 9091
+
+  binds:
+    - name: WOLFRAM_ALPHA_APP_ID
+      description: Wolfram|Alpha AppID for API authentication
+      workflows: [AI Knowledge Integration, Computational Search]
+
+crossReference:
+  - resource: queries
+    operations: [query-llm-api, query-full-results, get-short-answer, get-spoken-result]
+    workflows: [AI Knowledge Integration, Computational Search]
+    personas: [AI Developer, Chatbot Engineer, Search Engineer]
+  - resource: pods
+    operations: [query-full-results]
+    workflows: [Computational Search]
+    personas: [Search Engineer, Platform Developer]
+  - resource: answers
+    operations: [get-short-answer, get-spoken-result]
+    workflows: [AI Knowledge Integration]
+    personas: [Chatbot Engineer, AI Developer]

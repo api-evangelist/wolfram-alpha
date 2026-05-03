@@ -1,0 +1,94 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Wolfram|Alpha Spoken Results API"
+  description: "Audio-optimized answer API returning plain text formatted for text-to-speech delivery."
+  tags:
+    - Accessibility
+    - Audio
+    - Natural Language Processing
+    - Voice
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      WOLFRAM_ALPHA_APP_ID: WOLFRAM_ALPHA_APP_ID
+
+capability:
+  consumes:
+    - type: http
+      namespace: wolfram-spoken
+      baseUri: https://api.wolframalpha.com/v1
+      description: "Wolfram|Alpha Spoken Results API for voice delivery."
+      authentication:
+        type: apikey
+        key: appid
+        value: "{{WOLFRAM_ALPHA_APP_ID}}"
+        placement: query
+      resources:
+        - name: spoken-results
+          path: /spoken
+          description: "Get spoken-word formatted answers for audio delivery."
+          operations:
+            - name: get-spoken-result
+              method: GET
+              description: "Submit a query and receive a plain-text answer formatted for text-to-speech."
+              inputParameters:
+                - name: i
+                  in: query
+                  type: string
+                  required: true
+                  description: "URL-encoded input query string."
+                - name: units
+                  in: query
+                  type: string
+                  required: false
+                  description: "Measurement system: metric or imperial."
+                - name: timeout
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum processing time in seconds."
+              outputRawFormat: text
+              outputParameters:
+                - name: spoken_result
+                  type: string
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8103
+      namespace: wolfram-spoken-rest
+      resources:
+        - path: /v1/spoken-results
+          name: spoken-results
+          description: "Get Wolfram|Alpha answers formatted for audio delivery."
+          operations:
+            - method: GET
+              name: get-spoken-result
+              description: "Get a spoken-word formatted answer."
+              call: "wolfram-spoken.get-spoken-result"
+              with:
+                i: "rest.i"
+              outputParameters:
+                - type: string
+                  mapping: "$."
+
+    - type: mcp
+      port: 9103
+      namespace: wolfram-spoken-mcp
+      transport: http
+      tools:
+        - name: get-spoken-result
+          description: "Get a Wolfram|Alpha answer formatted for text-to-speech in voice assistants."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "wolfram-spoken.get-spoken-result"
+          with:
+            i: "tools.query"
+          outputParameters:
+            - type: string
+              mapping: "$."

@@ -1,0 +1,94 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Wolfram|Alpha Short Answers API"
+  description: "Concise plain-text answer API for chatbots, voice assistants, and constrained display contexts."
+  tags:
+    - Chatbot
+    - Natural Language Processing
+    - Short Answers
+    - Voice
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      WOLFRAM_ALPHA_APP_ID: WOLFRAM_ALPHA_APP_ID
+
+capability:
+  consumes:
+    - type: http
+      namespace: wolfram-short
+      baseUri: https://api.wolframalpha.com/v1
+      description: "Wolfram|Alpha Short Answers API for concise factual responses."
+      authentication:
+        type: apikey
+        key: appid
+        value: "{{WOLFRAM_ALPHA_APP_ID}}"
+        placement: query
+      resources:
+        - name: answers
+          path: /result
+          description: "Get a single concise answer to a natural language query."
+          operations:
+            - name: get-short-answer
+              method: GET
+              description: "Submit a query and receive a single plain-text answer."
+              inputParameters:
+                - name: i
+                  in: query
+                  type: string
+                  required: true
+                  description: "URL-encoded input query string."
+                - name: units
+                  in: query
+                  type: string
+                  required: false
+                  description: "Measurement system: metric or imperial."
+                - name: timeout
+                  in: query
+                  type: integer
+                  required: false
+                  description: "Maximum processing time in seconds."
+              outputRawFormat: text
+              outputParameters:
+                - name: answer
+                  type: string
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8102
+      namespace: wolfram-short-rest
+      resources:
+        - path: /v1/answers
+          name: answers
+          description: "Get short answers from Wolfram|Alpha."
+          operations:
+            - method: GET
+              name: get-short-answer
+              description: "Get a concise plain-text answer to a query."
+              call: "wolfram-short.get-short-answer"
+              with:
+                i: "rest.i"
+              outputParameters:
+                - type: string
+                  mapping: "$."
+
+    - type: mcp
+      port: 9102
+      namespace: wolfram-short-mcp
+      transport: http
+      tools:
+        - name: get-short-answer
+          description: "Get a concise factual answer from Wolfram|Alpha for chatbots and voice assistants."
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "wolfram-short.get-short-answer"
+          with:
+            i: "tools.query"
+          outputParameters:
+            - type: string
+              mapping: "$."

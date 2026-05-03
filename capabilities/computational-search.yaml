@@ -1,0 +1,109 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Wolfram|Alpha Computational Search"
+  description: >-
+    Comprehensive computational search capability combining the Full Results API
+    (complete pod-based results) and LLM API (AI-optimized results) for applications
+    requiring deep computational intelligence. Used by search platforms, educational
+    tools, and research applications needing rich multi-format results.
+  tags:
+    - Computation
+    - Education
+    - Full Results
+    - Math
+    - Research
+    - Science
+    - Search
+    - Wolfram Alpha
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      WOLFRAM_ALPHA_APP_ID: WOLFRAM_ALPHA_APP_ID
+
+capability:
+  consumes:
+    - import: wolfram-full
+      location: ./shared/full-results-api.yaml
+    - import: wolfram-llm
+      location: ./shared/llm-api.yaml
+
+  exposes:
+    - type: rest
+      port: 8081
+      namespace: wolfram-search-api
+      description: "Unified REST API for Wolfram|Alpha computational search."
+      resources:
+        - path: /v1/compute
+          name: computations
+          description: "Full computational results with pod-based output."
+          operations:
+            - method: GET
+              name: compute-full
+              description: "Get complete Wolfram|Alpha results with all pods and formats."
+              call: "wolfram-full.query-full-results"
+              with:
+                input: "rest.input"
+                output: "rest.output"
+                format: "rest.format"
+                includepodid: "rest.includepodid"
+                units: "rest.units"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/compute/llm
+          name: llm-computations
+          description: "LLM-optimized computational results."
+          operations:
+            - method: GET
+              name: compute-for-llm
+              description: "Get Wolfram|Alpha results formatted for LLM processing."
+              call: "wolfram-llm.query-llm-api"
+              with:
+                input: "rest.input"
+                maxchars: "rest.maxchars"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9091
+      namespace: wolfram-search-mcp
+      transport: http
+      description: "MCP server for AI-assisted computational search and scientific queries."
+      tools:
+        - name: compute-full-results
+          description: >-
+            Get complete Wolfram|Alpha computational results with all data pods.
+            Returns structured JSON with math, science, geography, and more.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "wolfram-full.query-full-results"
+          with:
+            input: "tools.input"
+            output: "tools.output"
+            format: "tools.format"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: compute-for-llm
+          description: >-
+            Query Wolfram|Alpha and receive computational results formatted
+            for LLM consumption. Includes structured text with interpretation
+            and result data.
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "wolfram-llm.query-llm-api"
+          with:
+            input: "tools.input"
+            maxchars: "tools.maxchars"
+          outputParameters:
+            - type: object
+              mapping: "$."
