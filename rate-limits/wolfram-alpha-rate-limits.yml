@@ -4,106 +4,34 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Wolfram|Alpha
 providerId: wolfram-alpha
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
   - AI
-  - Artificial Intelligence
   - Computational Knowledge
-  - Natural Language Processing
-  - Search
   - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Wolfram|Alpha API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
-responseCodes:
-  throttled: 429
-  quotaExceeded: 429
-  serviceUnavailable: 503
+description: Wolfram|Alpha publishes a non-commercial allowance of 2,000 API calls per account per month across the API family but does not publish per-second or per-minute throttling rates, response codes, or rate-limit headers in the public API reference. Query-shaping is exposed through per-request timeout parameters (scantimeout, podtimeout, formattimeout, parsetimeout, totaltimeout) rather than request-rate limits. Quantitative throttling values must be requested from Wolfram Research; the entries here capture only what is publicly documented.
+sources:
+  - https://products.wolframalpha.com/api
+  - https://products.wolframalpha.com/api/documentation
+responseCodes: {}
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Wolfram|Alpha LLM API
-      - Wolfram|Alpha Full Results API
-      - Wolfram|Alpha Short Answers API
-      - Wolfram|Alpha Simple API
-      - Wolfram|Alpha Spoken Results API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
+  - name: Non-Commercial Monthly Allowance
+    scope: account
     metric: requests_per_month
-    limit: 1000
+    limit: 2000
     timeFrame: month
-    applies:
-      - Wolfram|Alpha LLM API
-      - Wolfram|Alpha Full Results API
-      - Wolfram|Alpha Short Answers API
-      - Wolfram|Alpha Simple API
-      - Wolfram|Alpha Spoken Results API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - Wolfram|Alpha LLM API
-      - Wolfram|Alpha Full Results API
-      - Wolfram|Alpha Short Answers API
-      - Wolfram|Alpha Simple API
-      - Wolfram|Alpha Spoken Results API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - Wolfram|Alpha LLM API
-      - Wolfram|Alpha Full Results API
-      - Wolfram|Alpha Short Answers API
-      - Wolfram|Alpha Simple API
-      - Wolfram|Alpha Spoken Results API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - Wolfram|Alpha LLM API
-      - Wolfram|Alpha Full Results API
-      - Wolfram|Alpha Short Answers API
-      - Wolfram|Alpha Simple API
-      - Wolfram|Alpha Spoken Results API
+    notes: Immediate free access threshold across the Wolfram|Alpha API family for non-commercial use; documented on the Wolfram|Alpha API portal.
+  - name: Standard / Custom API Throttling
+    scope: account
+    metric: varies
+    limit: not publicly documented; contact Wolfram sales for paid-tier throttling specifics
+    notes: Wolfram does not publish per-second/per-minute throttling values for paid Standard or Custom API tiers.
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+  - name: Per-Request Timeouts
+    description: Each API call accepts scantimeout (default 3.0s), podtimeout (default 4.0s), formattimeout (default 8.0s), parsetimeout (default 5.0s), and totaltimeout (default 20.0s) parameters; these shape per-call processing time rather than request rate.
+  - name: Terms of Use
+    description: Use of the Full Results API and the broader Wolfram|Alpha API family is subject to the Wolfram|Alpha API Terms of Use; sustained or abusive usage patterns are governed contractually rather than by published numeric rate limits.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
