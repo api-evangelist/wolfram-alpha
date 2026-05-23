@@ -1,0 +1,7 @@
+name: Wolfram|Alpha Domain Vocabulary
+provider: Wolfram|Alpha
+providerId: wolfram-alpha
+description: Tag-derived vocabulary for the Wolfram|Alpha API surface; sourced from openapi/ tags.
+terms:
+- term: Queries
+  description: Submit natural language queries for full computational results

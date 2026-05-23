@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Pod",
+  "title": "Pod",
+  "type": "object",
+  "description": "A single result section (pod) from Wolfram|Alpha.",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Human-readable title for this pod.",
+      "example": "Result"
+    },
+    "scanner": {
+      "type": "string",
+      "description": "Internal scanner that generated this pod.",
+      "example": "Integral"
+    },
+    "id": {
+      "type": "string",
+      "description": "Pod identifier for filtering.",
+      "example": "Result"
+    },
+    "position": {
+      "type": "integer",
+      "description": "Ordering position in the result set.",
+      "example": 200
+    },
+    "primary": {
+      "type": "boolean",
+      "description": "Whether this is the primary result pod.",
+      "example": true
+    },
+    "subpods": {
+      "type": "array",
+      "description": "Sub-results within this pod.",
+      "items": {
+        "$ref": "#/components/schemas/Subpod"
+      },
+      "example": [
+        "string-value"
+      ]
+    }
+  }
+}

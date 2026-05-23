@@ -1,0 +1,39 @@
+{
+  "provider": "Wolfram|Alpha",
+  "providerId": "wolfram-alpha",
+  "kind": "json-structure",
+  "description": "Structural overview of the Wolfram|Alpha API surface; extracted from openapi/.",
+  "schemaCount": 3,
+  "operationCount": 1,
+  "schemas": [
+    {
+      "name": "FullResultsResponse",
+      "type": "object",
+      "propertyCount": 1,
+      "required": []
+    },
+    {
+      "name": "Pod",
+      "type": "object",
+      "propertyCount": 6,
+      "required": []
+    },
+    {
+      "name": "Subpod",
+      "type": "object",
+      "propertyCount": 2,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/query",
+      "operationId": "queryFullResults",
+      "summary": "Wolfram|Alpha Submit a Full Results Query",
+      "tags": [
+        "Queries"
+      ]
+    }
+  ]
+}
