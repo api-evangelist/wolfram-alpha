@@ -1,97 +1,137 @@
 # Wolfram|Alpha (wolfram-alpha)
+
 Wolfram|Alpha is a computational knowledge engine that provides answers to natural language queries using a vast curated knowledge base and computational algorithms. The Wolfram|Alpha API suite gives developers programmatic access to computational intelligence for web, mobile, and AI applications. APIs range from the full-featured Full Results API to specialized LLM, Short Answers, Simple, Spoken Results, and Fast Query Recognizer APIs.
 
-**URL:** [https://www.wolframalpha.com](https://www.wolframalpha.com)
+**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/wolfram-alpha/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/wolfram-alpha/refs/heads/main/apis.yml)
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+## Scope
 
-## Tags:
+- **Type:** Index
+- **Position:** Consumer
+- **Access:** 3rd-Party
 
- - AI, Artificial Intelligence, Computational Knowledge, Natural Language Processing, Search
+## Tags
+
+- AI
+- Artificial Intelligence
+- Computational Knowledge
+- Natural Language Processing
+- Search
 
 ## Timestamps
 
 - **Created:** 2024-10-18
-- **Modified:** 2026-05-03
+- **Modified:** 2026-05-19
 
 ## APIs
 
 ### Wolfram|Alpha LLM API
+
 The LLM API delivers computational knowledge results optimized for consumption by large language models and AI chat applications. Built on the same engine as the full API, it returns structured text with query interpretation, computed results, and relevant data formatted for LLM processing. Authentication uses an AppID query parameter or Bearer token.
 
-**Human URL:** [https://products.wolframalpha.com/llm-api/documentation](https://products.wolframalpha.com/llm-api/documentation)
+- **Human URL:** [https://products.wolframalpha.com/llm-api/documentation](https://products.wolframalpha.com/llm-api/documentation)
+- **Base URL:** `https://www.wolframalpha.com/api/v1/`
 
-#### Tags:
+#### Tags
 
- - AI, Computational Knowledge, LLM
+- AI
+- Computational Knowledge
+- LLM
 
 #### Properties
 
 - [Documentation](https://products.wolframalpha.com/llm-api/documentation)
-- [OpenAPI](openapi/wolfram-alpha-llm-api-openapi.yml)
-- [LLM API Response Schema](json-schema/wolfram-alpha-llm-api-llm-api-response-schema.json)
+- [OpenAPI](openapi/wolfram-alpha-llm-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/wolfram-alpha-llm-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/wolfram-alpha-llm-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [JSON Schema](json-schema/wolfram-alpha-llm-api-llm-api-response-schema.json) — [JSON Schema](https://json-schema.org/specification)
 
 ### Wolfram|Alpha Full Results API
+
 The Full Results API provides full programmatic access to all Wolfram|Alpha capabilities, including disambiguation, drilldown, asynchronous delivery, and results in multiple formats (XML, JSON). It supports customizable pod selection, location-aware queries, and display formatting.
 
-**Human URL:** [https://products.wolframalpha.com/api/documentation](https://products.wolframalpha.com/api/documentation)
+- **Human URL:** [https://products.wolframalpha.com/api/documentation](https://products.wolframalpha.com/api/documentation)
+- **Base URL:** `https://api.wolframalpha.com/v2/`
 
-#### Tags:
+#### Tags
 
- - Computation, Full Results, Natural Language Processing
+- Computation
+- Full Results
+- Natural Language Processing
 
 #### Properties
 
 - [Documentation](https://products.wolframalpha.com/api/documentation)
-- [OpenAPI](openapi/wolfram-alpha-full-results-api-openapi.yml)
-- [Full Results Response Schema](json-schema/wolfram-alpha-full-results-api-full-results-response-schema.json)
-- [Pod Schema](json-schema/wolfram-alpha-full-results-api-pod-schema.json)
-- [Subpod Schema](json-schema/wolfram-alpha-full-results-api-subpod-schema.json)
+- [OpenAPI](openapi/wolfram-alpha-full-results-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/wolfram-alpha-full-results-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/wolfram-alpha-full-results-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [JSON Schema](json-schema/wolfram-alpha-full-results-api-full-results-response-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/wolfram-alpha-full-results-api-pod-schema.json) — [JSON Schema](https://json-schema.org/specification)
+- [JSON Schema](json-schema/wolfram-alpha-full-results-api-subpod-schema.json) — [JSON Schema](https://json-schema.org/specification)
 
 ### Wolfram|Alpha Short Answers API
+
 The Short Answers API returns a single concise plain-text result from Wolfram|Alpha, ideal for chatbots, mobile apps, and constrained displays. Returns HTTP 501 when no brief answer is available.
 
-**Human URL:** [https://products.wolframalpha.com/short-answers-api/documentation](https://products.wolframalpha.com/short-answers-api/documentation)
+- **Human URL:** [https://products.wolframalpha.com/short-answers-api/documentation](https://products.wolframalpha.com/short-answers-api/documentation)
+- **Base URL:** `https://api.wolframalpha.com/v1/`
 
-#### Tags:
+#### Tags
 
- - Natural Language Processing, Short Answers, Text
+- Natural Language Processing
+- Short Answers
+- Text
 
 #### Properties
 
 - [Documentation](https://products.wolframalpha.com/short-answers-api/documentation)
-- [OpenAPI](openapi/wolfram-alpha-short-answers-api-openapi.yml)
+- [OpenAPI](openapi/wolfram-alpha-short-answers-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/wolfram-alpha-short-answers-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/wolfram-alpha-short-answers-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### Wolfram|Alpha Simple API
+
 The Simple API returns complete Wolfram|Alpha results as a rendered image, requiring minimal coding. Suitable for embedding computational results visually in web applications without handling complex XML/JSON responses.
 
-**Human URL:** [https://products.wolframalpha.com/simple-api/documentation](https://products.wolframalpha.com/simple-api/documentation)
+- **Human URL:** [https://products.wolframalpha.com/simple-api/documentation](https://products.wolframalpha.com/simple-api/documentation)
+- **Base URL:** `https://api.wolframalpha.com/v1/`
 
-#### Tags:
+#### Tags
 
- - Images, Natural Language Processing, Visual Results
+- Images
+- Natural Language Processing
+- Visual Results
 
 #### Properties
 
 - [Documentation](https://products.wolframalpha.com/simple-api/documentation)
-- [OpenAPI](openapi/wolfram-alpha-simple-api-openapi.yml)
+- [OpenAPI](openapi/wolfram-alpha-simple-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/wolfram-alpha-simple-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/wolfram-alpha-simple-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ### Wolfram|Alpha Spoken Results API
+
 The Spoken Results API returns answers optimized for audio delivery, suitable for voice assistants, automotive systems, and accessibility features. Results are plain text formatted to be read aloud naturally.
 
-**Human URL:** [https://products.wolframalpha.com/spoken-results-api/documentation](https://products.wolframalpha.com/spoken-results-api/documentation)
+- **Human URL:** [https://products.wolframalpha.com/spoken-results-api/documentation](https://products.wolframalpha.com/spoken-results-api/documentation)
+- **Base URL:** `https://api.wolframalpha.com/v1/`
 
-#### Tags:
+#### Tags
 
- - Audio, Natural Language Processing, Voice
+- Audio
+- Natural Language Processing
+- Voice
 
 #### Properties
 
 - [Documentation](https://products.wolframalpha.com/spoken-results-api/documentation)
-- [OpenAPI](openapi/wolfram-alpha-spoken-results-api-openapi.yml)
+- [OpenAPI](openapi/wolfram-alpha-spoken-results-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
+- [Postman Collection](collections/wolfram-alpha-spoken-results-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
+- [Open Collection](collections/wolfram-alpha-spoken-results-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
 
 ## Common Properties
 
+- [LinkedIn](https://www.linkedin.com/company/wolfram-alpha-llc)
 - [Website](https://www.wolframalpha.com)
 - [Developer Portal](https://developer.wolframalpha.com/)
 - [Portal](https://products.wolframalpha.com/api)
@@ -100,78 +140,12 @@ The Spoken Results API returns answers optimized for audio delivery, suitable fo
 - [Pricing](https://products.wolframalpha.com/api)
 - [Terms of Service](https://products.wolframalpha.com/api/documentation)
 - [Spectral Rules](rules/wolfram-alpha-spectral-rules.yml)
-- [AI Knowledge Integration](capabilities/ai-knowledge-integration.yaml)
-- [Computational Search](capabilities/computational-search.yaml)
 - [Vocabulary](vocabulary/wolfram-alpha-vocabulary.yaml)
-
-## Features
-
-| Name | Description |
-|------|-------------|
-| Computational Intelligence | Access Wolfram's curated knowledge base and computation engine for math, science, geography, and more. |
-| Multiple Output Formats | Choose from XML, JSON, plain text, image, or audio output depending on your application needs. |
-| LLM-Optimized Responses | Specialized API endpoint returns structured text formatted for large language model consumption. |
-| Sub-10ms Query Classification | Fast Query Recognizer classifies queries before sending to the full engine, reducing latency. |
-| Location-Aware Queries | Pass IP, coordinates, or location names for geographically relevant results. |
-
-## Use Cases
-
-| Name | Description |
-|------|-------------|
-| AI Assistant Integration | Provide LLMs with computational knowledge results via the LLM API. |
-| Chatbot Answers | Return concise answers to natural language questions in chatbot interfaces using the Short Answers API. |
-| Voice Applications | Deliver audio-ready answer strings for voice assistants using the Spoken Results API. |
-| Educational Platforms | Embed Wolfram computational results visually in learning platforms using the Simple API. |
-| Search Augmentation | Pre-classify user queries with the Fast Query Recognizer to route to Wolfram only when appropriate. |
-
-## Integrations
-
-| Name | Description |
-|------|-------------|
-| Mathematica | Wolfram Language integration for computational workflows. |
-| OpenAI / ChatGPT Plugin | Official ChatGPT plugin for Wolfram computational knowledge. |
-| Siri / Voice Assistants | Spoken Results API used by voice assistant integrations. |
-
-## Artifacts
-
-Machine-readable API specifications organized by format.
-
-### OpenAPI
-
-- [Wolfram|Alpha LLM API](openapi/wolfram-alpha-llm-api-openapi.yml)
-- [Wolfram|Alpha Full Results API](openapi/wolfram-alpha-full-results-api-openapi.yml)
-- [Wolfram|Alpha Short Answers API](openapi/wolfram-alpha-short-answers-api-openapi.yml)
-- [Wolfram|Alpha Simple API](openapi/wolfram-alpha-simple-api-openapi.yml)
-- [Wolfram|Alpha Spoken Results API](openapi/wolfram-alpha-spoken-results-api-openapi.yml)
-
-## Capabilities
-
-Naftiko capabilities organized as shared per-API definitions composed into customer-facing workflows.
-
-### Shared Per-API Definitions
-
-- [LLM API](capabilities/shared/llm-api.yaml) — 1 operation for computational LLM queries
-- [Full Results API](capabilities/shared/full-results-api.yaml) — 1 operation for complete pod-based results
-- [Short Answers API](capabilities/shared/short-answers-api.yaml) — 1 operation for concise text answers
-- [Spoken Results API](capabilities/shared/spoken-results-api.yaml) — 1 operation for audio-optimized answers
-
-### Workflow Capabilities
-
-| Workflow | APIs Combined | Tools | Persona |
-|----------|--------------|-------|---------|
-| [AI Knowledge Integration](capabilities/ai-knowledge-integration.yaml) | LLM API, Short Answers, Spoken Results | 3 | AI Developer, Chatbot Engineer |
-| [Computational Search](capabilities/computational-search.yaml) | Full Results API, LLM API | 2 | Search Engineer, Platform Developer |
-
-## Vocabulary
-
-- [Wolfram|Alpha Vocabulary](vocabulary/wolfram-alpha-vocabulary.yaml) — Unified taxonomy mapping 4 resources, 3 actions, 2 workflows, and 4 personas across operational (OpenAPI) and capability (Naftiko) dimensions
-
-## Rules
-
-- [Wolfram|Alpha Spectral Rules](rules/wolfram-alpha-spectral-rules.yml) — Spectral ruleset enforcing Wolfram|Alpha API conventions
+- [Features](undefined)
+- [Use Cases](undefined)
+- [Integrations](undefined)
 
 ## Maintainers
 
 **FN:** Kin Lane
-
 **Email:** kin@apievangelist.com

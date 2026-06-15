@@ -1,0 +1,315 @@
+{
+  "item": [
+    {
+      "id": "3eaca818-4d3d-4c4b-8b0a-8f39eb17e748",
+      "name": "Queries",
+      "description": {
+        "content": "Submit queries to receive spoken-word formatted text answers",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "96475632-fc06-4f45-9668-6fd2fe250b7f",
+          "name": "Wolfram|Alpha Get Spoken Result",
+          "request": {
+            "name": "Wolfram|Alpha Get Spoken Result",
+            "description": {
+              "content": "Submit a natural language query and receive a plain-text answer formatted for audio delivery. Results are phrased naturally for text-to-speech conversion, suitable for voice assistants, automotive applications, and accessibility features.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "spoken"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "appid",
+                  "value": "<string>",
+                  "description": "(Required) Wolfram|Alpha AppID for authentication."
+                },
+                {
+                  "disabled": false,
+                  "key": "i",
+                  "value": "<string>",
+                  "description": "(Required) URL-encoded input query string."
+                },
+                {
+                  "disabled": false,
+                  "key": "units",
+                  "value": "<string>",
+                  "description": "Measurement system preference. Values are metric or imperial."
+                },
+                {
+                  "disabled": false,
+                  "key": "timeout",
+                  "value": "<integer>",
+                  "description": "Maximum processing time in seconds. Default is 5."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "cd90066f-71c5-444b-a936-170fa7be6bb3",
+              "name": "Spoken-text formatted answer from Wolfram|Alpha.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spoken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "appid",
+                      "value": "DEMO-APP-ID"
+                    },
+                    {
+                      "key": "i",
+                      "value": "How tall is Mount Everest?"
+                    },
+                    {
+                      "key": "units",
+                      "value": "imperial"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "5"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "Mount Everest is approximately 29,032 feet or about 8,849 meters tall.",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f4a66a4a-e4bd-4699-8d25-1576f1af0257",
+              "name": "Bad request - input parameter missing or invalid.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spoken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "appid",
+                      "value": "DEMO-APP-ID"
+                    },
+                    {
+                      "key": "i",
+                      "value": "How tall is Mount Everest?"
+                    },
+                    {
+                      "key": "units",
+                      "value": "imperial"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "5"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d13e3c73-924a-4214-87b8-a2ebde45c8e4",
+              "name": "Invalid or missing AppID.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spoken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "appid",
+                      "value": "DEMO-APP-ID"
+                    },
+                    {
+                      "key": "i",
+                      "value": "How tall is Mount Everest?"
+                    },
+                    {
+                      "key": "units",
+                      "value": "imperial"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "5"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "9bd8c386-504b-46e9-8f46-cbe50e4b56f1",
+              "name": "Input cannot be interpreted or no spoken result available.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "spoken"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "appid",
+                      "value": "DEMO-APP-ID"
+                    },
+                    {
+                      "key": "i",
+                      "value": "How tall is Mount Everest?"
+                    },
+                    {
+                      "key": "units",
+                      "value": "imperial"
+                    },
+                    {
+                      "key": "timeout",
+                      "value": "5"
+                    },
+                    {
+                      "key": "appid",
+                      "value": "<API Key>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Implemented",
+              "code": 501,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.wolframalpha.com/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "appid"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "query"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "11f9ba53-8cc7-4762-8e7b-3f58b5b69ddd",
+    "name": "Wolfram|Alpha Spoken Results API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Wolfram|Alpha Spoken Results API returns answers optimized for audio delivery. Results are plain text formatted to be read aloud naturally, suitable for voice assistants, automotive systems, smart speakers, and accessibility features.\n\nContact Support:\n Name: Wolfram|Alpha Developer Support",
+      "type": "text/plain"
+    }
+  }
+}
