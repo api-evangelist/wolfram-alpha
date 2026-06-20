@@ -15,7 +15,7 @@ tags:
   - Search
 created: '2024-10-18'
 modified: '2026-05-19'
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 specificationVersion: '0.19'
 position: Consumer
 access: 3rd-Party
@@ -29,7 +29,7 @@ apis:
       Bearer token.
     humanURL: https://products.wolframalpha.com/llm-api/documentation
     baseURL: https://www.wolframalpha.com/api/v1/
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     tags:
       - AI
       - Computational Knowledge
