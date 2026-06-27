@@ -125,7 +125,7 @@ common:
     url: https://developer.wolframalpha.com/
   - type: Portal
     url: https://products.wolframalpha.com/api
-  - type: SignUp
+  - type: Signup
     url: https://developer.wolframalpha.com/
   - type: Authentication
     url: https://products.wolframalpha.com/api/documentation
