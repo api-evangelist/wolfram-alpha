@@ -1,0 +1,30 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/wolfram-alpha-full-results-api-openapi.yml, openapi/wolfram-alpha-llm-api-openapi.yml,
+  openapi/wolfram-alpha-short-answers-api-openapi.yml, openapi/wolfram-alpha-simple-api-openapi.yml,
+  openapi/wolfram-alpha-spoken-results-api-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - query
+schemes:
+- name: AppID
+  type: apiKey
+  in: query
+  parameter: appid
+  description: Wolfram|Alpha AppID passed as query parameter.
+  sources:
+  - openapi/wolfram-alpha-full-results-api-openapi.yml
+  - openapi/wolfram-alpha-llm-api-openapi.yml
+  - openapi/wolfram-alpha-short-answers-api-openapi.yml
+  - openapi/wolfram-alpha-simple-api-openapi.yml
+  - openapi/wolfram-alpha-spoken-results-api-openapi.yml
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: AppID
+  description: Pass AppID as Bearer token in Authorization header.
+  sources:
+  - openapi/wolfram-alpha-llm-api-openapi.yml

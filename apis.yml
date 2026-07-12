@@ -117,8 +117,14 @@ apis:
       - type: OpenAPI
         url: openapi/wolfram-alpha-spoken-results-api-openapi.yml
 common:
+  - type: DomainSecurity
+    url: security/wolfram-alpha-domain-security.yml
+  - type: Authentication
+    url: authentication/wolfram-alpha-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/wolfram-alpha-llc
+  - url: https://blog.wolfram.com/feed/
+    type: Blog
   - type: Website
     url: https://www.wolframalpha.com
   - type: DeveloperPortal
