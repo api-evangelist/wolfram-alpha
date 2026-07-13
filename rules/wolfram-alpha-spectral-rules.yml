@@ -1,18 +1,35 @@
+# wolfram-alpha — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - servers-expected-domain: 5/5 servers on wolframalpha.com
+#   - query-params-casing: snake @ 100% (n=47)
+#   - operationid-casing: camel @ 100% (n=5)
+#   - schema-names-casing: pascal @ 100% (n=4)
+#   - schema-properties-casing: snake @ 93% (n=14)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - operation-documents-400: 100% adherence
+#   - operation-documents-403: 100% adherence
+#   - merge: kept 26 existing, added 7 measured, upgraded 0
+#   - added: servers-expected-domain, query-params-casing, schema-names-casing, schema-properties-casing, operation-documents-400, operation-documents-403, no-empty-descriptions
+extends:
+  - spectral:oas
 rules:
-  # INFO / METADATA
   info-title-required:
     description: API title must be present and start with "Wolfram|Alpha".
-    message: "info.title must be present and start with 'Wolfram|Alpha'."
+    message: info.title must be present and start with 'Wolfram|Alpha'.
     severity: error
     given: $.info
     then:
-      - field: title
-        function: truthy
-      - field: title
-        function: pattern
-        functionOptions:
-          match: "^Wolfram\\|Alpha"
-
+    - field: title
+      function: truthy
+    - field: title
+      function: pattern
+      functionOptions:
+        match: ^Wolfram\|Alpha
   info-description-required:
     description: API description must be present and at least 50 characters.
     severity: error
@@ -22,7 +39,6 @@ rules:
       function: minLength
       functionOptions:
         value: 50
-
   info-version-required:
     description: API version must be specified.
     severity: error
@@ -30,7 +46,6 @@ rules:
     then:
       field: version
       function: truthy
-
   info-contact-required:
     description: Contact information must be present.
     severity: warn
@@ -38,8 +53,6 @@ rules:
     then:
       field: contact
       function: truthy
-
-  # OPENAPI VERSION
   openapi-version:
     description: OpenAPI version must be 3.1.0.
     severity: warn
@@ -48,9 +61,7 @@ rules:
       field: openapi
       function: pattern
       functionOptions:
-        match: "^3\\.1\\."
-
-  # SERVERS
+        match: ^3\.1\.
   servers-required:
     description: At least one server must be defined.
     severity: error
@@ -58,7 +69,6 @@ rules:
     then:
       field: servers
       function: truthy
-
   servers-https:
     description: All server URLs must use HTTPS.
     severity: error
@@ -67,9 +77,7 @@ rules:
       field: url
       function: pattern
       functionOptions:
-        match: "^https://"
-
-  # PATHS - NAMING CONVENTIONS
+        match: ^https://
   paths-no-trailing-slash:
     description: Paths must not have trailing slashes.
     severity: warn
@@ -77,8 +85,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        notMatch: "/$"
-
+        notMatch: /$
   paths-query-params-not-in-path:
     description: Query parameters must not be embedded in path strings.
     severity: error
@@ -86,111 +93,99 @@ rules:
     then:
       function: pattern
       functionOptions:
-        notMatch: "\\?"
-
-  # OPERATIONS
+        notMatch: \?
   operation-operationid-required:
     description: Every operation must have an operationId.
     severity: error
-    given: "$.paths[*][get,post,put,patch,delete,head,options]"
+    given: $.paths[*][get,post,put,patch,delete,head,options]
     then:
       field: operationId
       function: truthy
-
   operation-operationid-camelcase:
     description: operationId must use camelCase.
     severity: warn
-    given: "$.paths[*][get,post,put,patch,delete,head,options].operationId"
+    given: $.paths[*][get,post,put,patch,delete,head,options].operationId
     then:
       function: pattern
       functionOptions:
-        match: "^[a-z][a-zA-Z0-9]*$"
-
+        match: ^[a-z][a-zA-Z0-9]*$
   operation-summary-required:
     description: Every operation must have a summary.
     severity: error
-    given: "$.paths[*][get,post,put,patch,delete,head,options]"
+    given: $.paths[*][get,post,put,patch,delete,head,options]
     then:
       field: summary
       function: truthy
-
   operation-summary-wolfram-prefix:
     description: Operation summaries must start with "Wolfram|Alpha ".
-    message: "Operation summary must start with 'Wolfram|Alpha '."
+    message: Operation summary must start with 'Wolfram|Alpha '.
     severity: warn
-    given: "$.paths[*][get,post,put,patch,delete,head,options].summary"
+    given: $.paths[*][get,post,put,patch,delete,head,options].summary
     then:
       function: pattern
       functionOptions:
-        match: "^Wolfram\\|Alpha "
-
+        match: '^Wolfram\|Alpha '
   operation-description-required:
     description: Every operation must have a description.
     severity: warn
-    given: "$.paths[*][get,post,put,patch,delete,head,options]"
+    given: $.paths[*][get,post,put,patch,delete,head,options]
     then:
       field: description
       function: truthy
-
   operation-tags-required:
     description: Every operation must have at least one tag.
     severity: warn
-    given: "$.paths[*][get,post,put,patch,delete,head,options]"
+    given: $.paths[*][get,post,put,patch,delete,head,options]
     then:
       field: tags
       function: truthy
-
-  # PARAMETERS
   parameter-description-required:
     description: All parameters must have descriptions.
     severity: warn
-    given: "$.paths[*][get,post,put,patch,delete][*].parameters[*]"
+    given: $.paths[*][get,post,put,patch,delete][*].parameters[*]
     then:
       field: description
       function: truthy
-
   parameter-appid-required-description:
     description: The appid parameter description must mention Wolfram|Alpha AppID.
     severity: info
-    given: "$.paths[*][get].parameters[?(@.name == 'appid')]"
+    given: $.paths[*][get].parameters[?(@.name == 'appid')]
     then:
       field: description
       function: truthy
-
-  # RESPONSES
   response-success-required:
     description: Operations must define at least a 200 success response.
     severity: error
-    given: "$.paths[*][get,post,put,patch,delete].responses"
+    given: $.paths[*][get,post,put,patch,delete].responses
     then:
       function: schema
       functionOptions:
         schema:
           anyOf:
-            - required: ['200']
-            - required: ['201']
-
+          - required:
+            - '200'
+          - required:
+            - '201'
   response-error-400-defined:
     description: Operations should define a 400 error response.
     severity: info
-    given: "$.paths[*][get,post].responses"
+    given: $.paths[*][get,post].responses
     then:
       function: schema
       functionOptions:
         schema:
-          required: ['400']
-
+          required:
+          - '400'
   response-error-403-defined:
     description: Operations should define a 403 error response for auth-protected APIs.
     severity: info
-    given: "$.paths[*][get,post].responses"
+    given: $.paths[*][get,post].responses
     then:
       function: schema
       functionOptions:
         schema:
-          required: ['403']
-
-  # TAGS
+          required:
+          - '403'
   tag-description-required:
     description: Global tags must have descriptions.
     severity: warn
@@ -198,49 +193,98 @@ rules:
     then:
       field: description
       function: truthy
-
-  # SECURITY
   security-schemes-defined:
     description: Security schemes must be defined in components.
     severity: warn
     given: $.components.securitySchemes
     then:
       function: truthy
-
-  # HTTP METHOD CONVENTIONS
   get-no-request-body:
     description: GET operations must not have request bodies.
     severity: error
-    given: "$.paths[*].get"
+    given: $.paths[*].get
     then:
       field: requestBody
       function: falsy
-
   delete-no-request-body:
     description: DELETE operations should not have request bodies.
     severity: warn
-    given: "$.paths[*].delete"
+    given: $.paths[*].delete
     then:
       field: requestBody
       function: falsy
-
-  # GENERAL QUALITY
   operation-examples-encouraged:
     description: Operations should provide examples for documentation and mocking.
     severity: info
-    given: "$.paths[*][get,post,put,patch,delete].responses[*].content[*]"
+    given: $.paths[*][get,post,put,patch,delete].responses[*].content[*]
     then:
       function: schema
       functionOptions:
         schema:
           anyOf:
-            - required: ['example']
-            - required: ['examples']
-
+          - required:
+            - example
+          - required:
+            - examples
   microcks-operation-extension:
     description: Operations should include x-microcks-operation for mock server compatibility.
     severity: info
-    given: "$.paths[*][get,post,put,patch,delete]"
+    given: $.paths[*][get,post,put,patch,delete]
     then:
       field: x-microcks-operation
+      function: truthy
+  servers-expected-domain:
+    description: Server URLs should be on the wolframalpha.com domain.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: wolframalpha\.com
+  query-params-casing:
+    description: Query parameters should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in=='query')]
+    then:
+      field: name
+      function: casing
+      functionOptions:
+        type: snake
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  schema-properties-casing:
+    description: Schema properties should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: snake
+  operation-documents-400:
+    description: Operations should document a 400 response (documented on 100% of this API's operations).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      field: '400'
+      function: truthy
+  operation-documents-403:
+    description: Operations should document a 403 response (documented on 100% of this API's operations).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].responses
+    then:
+      field: '403'
+      function: truthy
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
+    then:
       function: truthy
