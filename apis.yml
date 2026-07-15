@@ -117,6 +117,8 @@ apis:
       - type: OpenAPI
         url: openapi/wolfram-alpha-spoken-results-api-openapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/wolfram-alpha-agentic-access.yml
   - type: DomainSecurity
     url: security/wolfram-alpha-domain-security.yml
   - type: Authentication
